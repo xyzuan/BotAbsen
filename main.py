@@ -7,17 +7,19 @@ rev = "rev1.0.confidental"
 import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 
 loop = 0
 web = "https://infokhs.umm.ac.id"
 
+nim_db = open("nim.txt","r")
+pic_db = open("pic.txt","r")
+
 os.system('cls')
-print("\n === System Login ===\n")
-nim = input(" Masukkan NIM : ")
-pic = input(" Masukkan PIC : ")
+nim = nim_db.read()
+pic = pic_db.read()
+
+nim_db.close()
+pic_db.close()
 
 os.system('cls')
 print("================================================")
@@ -34,7 +36,7 @@ print("\n 1. Pancasila\t\t 2. Olahraga\n 3. Pemdas\t\t 4. Orkom\n 5. Kalkulus\t\
 menu = input("Pilih mata kuliah : ")
 
 # Login Page
-absen = webdriver.Chrome(service = Service(ChromeDriverManager().install()))
+absen = webdriver.Edge(executable_path=r'msedgedriver.exe')
 absen.get(web)
 absen.find_element(By.NAME, "username").send_keys(nim)
 absen.find_element(By.NAME, "password").send_keys(pic)
